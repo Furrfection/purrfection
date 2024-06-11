@@ -1,0 +1,40 @@
+<!-- views/services.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <style>
+    body {
+      padding: 20px;
+    }
+    .service-list {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5">Our Services</h1>
+    <% if (Services.length) { %>
+        <div>
+            <!-- Iterate over each service -->
+            <% for (let Service of Services) { %>
+                <h4><%= Service.title %></h4>
+            <% } %>
+        </div>
+    <% } else { %>
+        <div>No services available</div>
+    <% } %>
+</div>
+
+    
+    </ul>
+  </div>
+</body> 
+</html>

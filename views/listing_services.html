@@ -1,0 +1,36 @@
+DELIMITER //
+
+CREATE PROCEDURE DisplayServiceProviders()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE id INT;
+    DECLARE name VARCHAR(255);
+    DECLARE location VARCHAR(255);
+    DECLARE service VARCHAR(255);
+    DECLARE cur CURSOR FOR SELECT id, name, location, service FROM providers;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+    OPEN cur;
+    myloop: LOOP
+        FETCH cur INTO id, name, location, service;
+        IF done THEN
+            LEAVE myloop;
+        END IF;
+        SELECT CONCAT(
+            '<div class="col-md-4 mb-4">',
+            '<div class="card">',
+            '<img src="provider_default.jpg" class="card-img-top" alt="Service Provider">',
+            '<div class="card-body">',
+            '<h5 class="card-title">', name, '</h5>',
+            '<p class="card-text">Location: ', location, '</p>',
+            '<p class="card-text">Service: ', service, '</p>',
+            '<a href="#" class="btn btn-primary">Contact</a>',
+            '</div>',
+            '</div>',
+            '</div>'
+        ) AS html;
+    END LOOP;
+    CLOSE cur;
+END //
+
+DELIMITER ;
